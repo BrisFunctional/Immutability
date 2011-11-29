@@ -23,16 +23,14 @@ void fill_to_sum(int size) {
 }
 
 int filter_on_multiples(int size, int *list, int totsum) {
-    if (size == 0) {
+    if (size == 0)
         return totsum;
-    } else {
-        if (is_multiple_of(list[size])) {
-            printf("adding %d\n", list[size]);
-            return list[size] + filter_on_multiples(size-1, list, totsum);
-        } else {
-            return filter_on_multiples(size-1, list, totsum);
-        }
-    }
+
+    int sub_sum = filter_on_multiples(size-1, list, totsum);
+    if (is_multiple_of(list[size]))
+        return list[size] + sub_sum;
+    else
+        return sub_sum;
 }
 
 int main(int argc, char *argv[])
